@@ -1,11 +1,28 @@
 # Simple Shift Library for the Arduino 
 
+## About
 
-### Usage
+This is a simple to use library for arduino to control up to 32 shift registers.  It is optimized for memory and speed, but also provides a clean and simple API.  All states are buffered in memory and pushed to registers at end. 
 
-See example folder.
+## Usage
 
-### How to Wire
+See example folder for detailed example.
+
+Basic usage:
+
+    // Create object, see below for details on parameters
+    SimpleShift simpleShift(2, 8, 9, 10);
+
+    // clear all bits
+    simpleShift.clearBuffer();
+    
+    // Set bit 4 to ON.
+    simpleShift.setBufferBit(4, HIGH);
+
+    // Flush data to take affect.
+    simpleShift.writeRegisters();
+
+## How to Wire
 
 [74HC595 Datasheet (pdf)](http://www.ti.com/lit/ds/symlink/sn74hc595.pdf)
 
@@ -33,7 +50,7 @@ You can wire up multiple shift register by tying QH\` [pin 9] from first registe
 ![Wiring](http://bildr.org/blog/wp-content/uploads/2011/02/74HC595_4.png)
 
 
-### TODO
+## TODO
 * Return Number of registers
 * Return byte value of register buffer
 * Functions to set 7 segment display character
