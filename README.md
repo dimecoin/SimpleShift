@@ -17,7 +17,7 @@ See example folder.
 * GND [pin 8] should go to Ground
 * !OE [pin 13] should be tied to Ground 
 
-![test](http://i.imgur.com/W5lKDp4.png)
+![Pinout](http://i.imgur.com/W5lKDp4.png)
 
 Library needs to know about SER, RCLK and SRCLK pin.  They are configurable in software like this:
 
@@ -29,7 +29,8 @@ Parameters are: (NumerOfShiftRegisters, SERPIN, RCKPIN, SCKPIN)
 
 You can wire up multiple shift register by tying QH\` [pin 9] from first register to SER [pin 14] on second register.  All other connections would be same for second register.
     
-* [Another Wiring Guide](http://bildr.org/2011/02/74hc595/)    
+* [Another Wiring Guide](http://bildr.org/2011/02/74hc595/)
+![Wiring](http://bildr.org/blog/wp-content/uploads/2011/02/74HC595_4.png)
 
 
 ### TODO
