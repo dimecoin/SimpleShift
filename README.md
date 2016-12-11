@@ -27,7 +27,7 @@ Parameters are: (NumerOfShiftRegisters, SERPIN, RCKPIN, SCKPIN)
 
 * Number of Shift Registers wired up (in this case, 1)
 
-You can wire up multiple shift register by tying QH\` [pin 9] from first register to SER [pin 14] on second register.
+You can wire up multiple shift register by tying QH\` [pin 9] from first register to SER [pin 14] on second register.  All other connections would be same for second register.
     
 * [Another Wiring Guide](http://bildr.org/2011/02/74hc595/)    
 
