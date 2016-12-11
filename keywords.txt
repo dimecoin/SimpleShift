@@ -1,0 +1,27 @@
+#######################################
+# Simple Shift Library For the Arduino To Make Use of 74HC595 Shift Register[s]
+####################################### 
+# Class
+#######################################
+
+SimpleShift	KEYWORD1
+
+#######################################
+# Methods and Functions 
+#######################################	
+clearBuffer	KEYWORD2
+fillBuffer	KEYWORD2
+randomFillBuffer	KEYWORD2
+invertBuffer	KEYWORD2
+setBufferBit	KEYWORD2
+writeRegisters	KEYWORD2
+getBufferBit	KEYWORD2
+getNumberOfBits	KEYWORD2
+
+
+
+
+#######################################
+# Constants
+#######################################
+ 
