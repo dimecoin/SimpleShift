@@ -1,7 +1,8 @@
 # Simple Shift Library for the Arduino 
 
 
-
+### Usage
+See example folder
 
 
 ### TODO
