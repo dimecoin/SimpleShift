@@ -6,7 +6,7 @@ This is a simple to use library for arduino to control up to 32 shift registers.
 
 ## Usage
 
-See example folder for detailed example.
+See example folder for detailed example.  See header file (SimpleShift.h) for methods avaiable and documentation.
 
 Basic usage:
 
