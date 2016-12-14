@@ -11,12 +11,27 @@
 class SimpleShift {
 
 	public :
-		SimpleShift (uint8_t numberOfShiftRegisters, uint8_t SERPin, uint8_t RCKPin, uint8_t SCKPin);
+		/** 
+		 * numberOfShiftRegisters = number of shift registers connected together.  Starts at 1 instead of 0.
+		 * SERPin is Arduino pin number that is connected to SER [pin 14] on 74HC595
+		 * RCKPin is Arduino pin number that is connected to RCLK [pin 12] on 74HC595
+		 * SCKPin is Arduino pin number that is connected to SRCLK [pin 11] on 74HC595
+		 * SRCLRPin : 
+		 * 	For hardware mode: this is Arduino pin number connected to to !SRCLRPIN [pin 10] on 74HC595.
+		 * 	For software mode:  Use -1 in constructor and tie !SRLCPIN [pin 10] on 74HC595 to VCC.
+		 * 	Do not float this pin.
+		 */
+		SimpleShift (uint8_t numberOfShiftRegisters, uint8_t SERPin, uint8_t RCKPin, uint8_t SCKPin, int8_t SRCLRPin);
 		~SimpleShift ();
 
 		/** Zero out all bits in memory buffer*/
 		void clearBuffer();
 
+		/** Instantly clears shift register and does NOT require a writeRegisters() to take affect.  Uses hardware if SRCLRPin is wired, otherwise uses software mode.
+		 * clearBuffer:  You can either clear your memory buffer or not. 
+		 */
+		void clearShiftRegister(bool wipeBuffer);
+		
 		/** Set all bits to 1  in memory buffer*/
 		void fillBuffer();
 
@@ -42,6 +57,7 @@ class SimpleShift {
 
 	private:
 		uint8_t SERPin, RCKPin, SCKPin;
+		int8_t SRCLRPin;
 		uint8_t numberOfShiftRegisters=1;
 		uint8_t *bits;
 
