@@ -24,15 +24,15 @@ class SimpleShift {
 		SimpleShift (uint8_t numberOfShiftRegisters, uint8_t SERPin, uint8_t RCKPin, uint8_t SCKPin, int8_t SRCLRPin);
 		~SimpleShift ();
 
-		/** Zero out all bits in memory buffer.  
-		* Requires a writeRegisters() call to take affect on shift register[s].*/
-		void clearBuffer();
-
 		/** Instantly clears shift register and does NOT require a writeRegisters() to take affect.  Uses hardware if SRCLRPin is wired, otherwise uses software mode.
 		 * clearBuffer:  You can either clear your memory buffer or not.   
 		 */
 		void clearShiftRegister(bool wipeBuffer);
-		
+
+		/** Zero out all bits in memory buffer.  
+		* Requires a writeRegisters() call to take affect on shift register[s].*/
+		void clearBuffer();
+
 		/** Set all bits to 1  in memory buffer
 		* Requires a writeRegisters() call to take affect on shift register[s].*/
 		void fillBuffer();
@@ -44,6 +44,34 @@ class SimpleShift {
 		/** Invert bits (bitewise opertation).  That is set all 0's to 1 and visa-versa 
 		* Requires a writeRegisters() call to take affect on shift register[s].*/
 		void invertBuffer();
+
+		/** Sets all Modulus bits high, all other bits low.
+		* Requires a writeRegisters() call to take affect on shift register[s].*/
+		void setModulusBuffer(uint8_t mod);
+		
+		/** Sets all odd bits high, all even bits low.
+		* Requires a writeRegisters() call to take affect on shift register[s].*/
+		void setOddBuffer();
+
+		/** Sets all even bits high, all odd bits low.
+		* Requires a writeRegisters() call to take affect on shift register[s].*/
+		void setEvenBuffer();
+
+		/** 
+		 * This chases bit from 0 to getNumberOfBits().  Setting active bit to 1.
+		 * bool pingPong: false makes it loop back at start, true makes it "ping pong" back and forth.
+		 *
+		 * To use this, just call it every loop and will update memory buffer.
+		 * Usage in loop():
+		 * 
+		 *  	simpleShift.clearBuffer();
+		 *  	simpleShift.chase(false);
+		 *  	simpleShift.writeRegisters();
+		 * 	 delay(1000);
+		 *
+		 * Hints, call clearBuffer before method and writeRegisters after.
+		* Requires a writeRegisters() call to take affect on shift register[s].*/
+		void chase(bool pingPong);
 
 		/** Set a single bit 
 		* Requires a writeRegisters() call to take affect on shift register.*/
@@ -68,6 +96,9 @@ class SimpleShift {
 
 		uint8_t getBufferArrayPos(uint8_t index);
 		uint8_t getBitPos(uint8_t index);
+
+		uint8_t chaseIndex = 0;
+		uint8_t chaseDirection = 1;
 
 };
 

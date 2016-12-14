@@ -67,13 +67,56 @@ void SimpleShift::invertBuffer() {
 	for (int8_t i=0; i<numberOfShiftRegisters; i++) {
 		bits[i] = ~bits[i];
 	}
-
 };
+
+void SimpleShift::setModulusBuffer(uint8_t mod) {
+	
+	for (uint8_t i = 0; i<getNumberOfBits(); i++) {
+		if (i % mod == 0) {
+		       setBufferBit(i, HIGH);
+		} else {
+		       setBufferBit(i, LOW);
+		}		
+	}
+	
+}
+
+void SimpleShift::setOddBuffer() {
+	setModulusBuffer(2);
+	invertBuffer();
+};
+void SimpleShift::setEvenBuffer() {
+	setModulusBuffer(2);
+}
+
+
+void SimpleShift::chase(bool pingPong) {
+
+	setBufferBit(chaseIndex, HIGH);
+	chaseIndex+=chaseDirection;
+
+
+	if (pingPong) {
+		if (chaseIndex == getNumberOfBits()-1 ) {
+			chaseDirection = -1;
+		}
+		if (chaseIndex == 0) {
+			chaseDirection = 1;
+		}
+
+	}  else {
+		if (chaseIndex == getNumberOfBits() ) {
+			chaseIndex = 0;
+		}
+	}
+}
+
 
 uint8_t SimpleShift::getBufferArrayPos(uint8_t index) {
 	uint8_t reg = index/8;
 	return (reg);
 }
+
 
 uint8_t SimpleShift::getBitPos(uint8_t index) {
 
